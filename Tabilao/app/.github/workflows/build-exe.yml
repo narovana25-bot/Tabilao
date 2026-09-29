@@ -21,14 +21,16 @@ jobs:
           node-version: 20
 
       - name: Install dependencies
+        working-directory: ./tabilao-exe
         run: npm install
 
       - name: Build EXE
+        working-directory: ./tabilao-exe
         run: npm run build
 
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
           name: Tabilao-Anjara-Windows
-          path: dist/Tabilao-Anjara.exe
+          path: tabilao-exe/dist/*.exe
           if-no-files-found: error
