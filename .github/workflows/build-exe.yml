@@ -26,11 +26,17 @@ jobs:
       - name: Build EXE
         run: npm run build
 
+      - name: Show files
+        if: always()
+        run: |
+          Write-Host "=== ROOT ==="
+          Get-ChildItem
+          Write-Host "=== DIST ==="
+          if (Test-Path dist) { Get-ChildItem dist }
+
       - name: Upload EXE
         uses: actions/upload-artifact@v4
         with:
           name: Tabilao-Anjara-Windows
-          path: |
-            dist/*.exe
-            release/*.exe
+          path: dist/*.exe
           if-no-files-found: error
